@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { todos } from "@/db/schema";
+import { desc } from "drizzle-orm";
 import { createSelectSchema } from "drizzle-zod";
 import { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { z } from "zod";
@@ -29,10 +30,15 @@ export const listTodos: FastifyPluginAsyncZod = async (app) => {
     },
     async (request, reply) => {
       const { limit } = request.query;
-      const response = await db.select().from(todos).limit(limit);
+
+      // const response = await db
+      //   .select()
+      //   .from(todos)
+      //   .orderBy(desc(todos.createdAt))
+      //   .limit(limit);
 
       return reply.send({
-        todos: response,
+        todos: [],
       });
     },
   );

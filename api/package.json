@@ -6,15 +6,25 @@
     "dev": "tsx watch --env-file=.env src/server.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "pretest": "docker-compose up -d db_test",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "posttest": "docker-compose stop db_test"
   },
   "packageManager": "pnpm@10.14.0",
   "devDependencies": {
     "@types/node": "^24.10.0",
     "@types/pg": "^8.15.6",
+    "@types/supertest": "^6.0.3",
+    "@vitest/ui": "4.0.7",
+    "dotenv": "^17.2.3",
     "drizzle-kit": "^0.31.6",
+    "supertest": "^7.1.4",
     "tsx": "^4.20.6",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^4.0.7"
   },
   "dependencies": {
     "@fastify/cors": "^11.1.0",

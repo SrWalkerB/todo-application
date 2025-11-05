@@ -13,6 +13,7 @@ import { isResponseSerializationError } from "fastify-type-provider-zod";
 import { env } from "./env";
 import { listTodos } from "./routes/list-todos";
 import { createTodos } from "./routes/create-todos";
+import { deleteTodos } from "./routes/delete-todos";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -66,8 +67,11 @@ app.register(ScalarApiReference, {
 
 app.register(createTodos);
 app.register(listTodos);
+app.register(deleteTodos)
 
 app.listen({ port: env.PORT, host: "0.0.0.0" }).then(() => {
   console.log(`HTTP server Running: http://localhost:3000`);
   console.log(`Docs Running: http://localhost:3000/docs`);
 });
+
+export default app
