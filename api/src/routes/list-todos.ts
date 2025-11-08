@@ -18,10 +18,8 @@ export const listTodos: FastifyPluginAsyncZod = async (app) => {
         response: {
           200: z.object({
             todos: z.array(
-              createSelectSchema(todos).pick({
-                id: true,
-                title: true,
-                description: true,
+              createSelectSchema(todos).omit({
+                createdAt: true,
               }),
             ),
           }),
@@ -31,14 +29,14 @@ export const listTodos: FastifyPluginAsyncZod = async (app) => {
     async (request, reply) => {
       const { limit } = request.query;
 
-      // const response = await db
-      //   .select()
-      //   .from(todos)
-      //   .orderBy(desc(todos.createdAt))
-      //   .limit(limit);
+      const response = await db
+        .select()
+        .from(todos)
+        .orderBy(desc(todos.createdAt))
+        .limit(limit);
 
       return reply.send({
-        todos: [],
+        todos: response,
       });
     },
   );

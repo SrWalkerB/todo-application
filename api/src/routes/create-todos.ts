@@ -14,6 +14,8 @@ export const createTodos: FastifyPluginAsyncZod = async (app) => {
         body: z.object({
           title: z.string().min(1),
           description: z.string().optional(),
+          startDate: z.coerce.date().optional(),
+          endDate: z.coerce.date().optional(),
         }),
         response: {
           201: createSelectSchema(todos).pick({
