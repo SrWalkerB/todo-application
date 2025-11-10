@@ -58,7 +58,7 @@ export const listTasks: FastifyPluginAsyncZod = async (app) => {
             taskCategory,
             eq(tasks.taskCategoryId, taskCategory.id)
           )
-          .orderBy(desc(tasks.createdAt))
+          .orderBy(desc(tasks.completedAt))
           .limit(limit)
 
         return await reply.send({

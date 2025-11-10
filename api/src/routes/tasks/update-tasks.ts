@@ -106,7 +106,8 @@ export const updateTasks: FastifyPluginAsyncZod = async (app) => {
       const response = await db
         .update(tasks)
         .set({
-          isCompleted: isCompleted
+          isCompleted: isCompleted,
+          completedAt: isCompleted ? new Date() : null
         })
         .where(eq(tasks.id, id))
         .returning({

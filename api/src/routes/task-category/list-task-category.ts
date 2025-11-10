@@ -4,6 +4,7 @@ import { createSelectSchema } from "drizzle-zod";
 import { taskCategory } from "@/db/schema";
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
+import { asc } from "drizzle-orm";
 
 export const listTaskCategory: FastifyPluginAsyncZod = async (app) => {
   app.get(
@@ -39,6 +40,7 @@ export const listTaskCategory: FastifyPluginAsyncZod = async (app) => {
         .where(
           eq(taskCategory.isActive, true)
         )
+        .orderBy(asc(taskCategory.name))
         .limit(limit)
 
       return await reply.send({

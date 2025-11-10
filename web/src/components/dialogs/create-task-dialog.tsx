@@ -54,7 +54,6 @@ export function CreateEditTaskDialog({ typeDialog, task, ...props }: CreateTaskD
     } : {
       title: "",
       description: "",
-      // taskCategoryId: ""
     }
   });
   const [opengDialog, setOpenDialog] = useState(false);
